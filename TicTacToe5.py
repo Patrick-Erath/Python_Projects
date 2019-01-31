@@ -68,6 +68,7 @@ while play:
 	while not game_won:
 		current_player=next(player_choice)
 		print(f"Current Player: {current_player}")
+		print("")
 		played = False
 
 		while not played and game_won == False:
