@@ -4,4 +4,4 @@ A repository of small python projects that were built in order to learn the basi
 
 ## Tic Tac Toe Game
 A simple Tic Tac Toe game that can be played in the console/terminal using Python3
-![GamePlay](Images/GamePlay.jpg)
+![GamePlay](Images/GamePlay.png)
