@@ -11,7 +11,7 @@ The game gets progressively harder as the obstacles fall at a faster pace and be
 
 ![RaceGame2](Images/RaceGame2.png)
 
-![RaceGame2](Images/RaceGame2.png)
+![RaceGame3](Images/RaceGame3.png)
 
 ## Tic Tac Toe Game
 A simple Tic Tac Toe game that can be played in the console/terminal using Python3
