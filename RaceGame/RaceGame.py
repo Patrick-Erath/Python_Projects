@@ -9,8 +9,12 @@ car_width = 80
 
 black = (0, 0, 0)
 white = (255, 255, 255)
-red = (252, 53, 53)
+red = (250, 50, 50)
 blue = (51, 250, 204)
+green = (61, 140, 30)
+
+dark_red = (200, 0, 0)
+dark_green = (11, 90, 0)
 
 gameDisplay = pygame.display.set_mode((display_width,display_height)) #Sets window size
 pygame.display.set_caption('Fast and Furious') #Sets window name
@@ -36,7 +40,7 @@ def car(x,y):
 	#Car image is a paramater, so need to reference x and y as a tuple
 
 def text_objects(text, font):
-	textSurface = font.render(text, True, red)
+	textSurface = font.render(text, True, black)
 	return textSurface, textSurface.get_rect() 
 
 def message_display(text, fontSize, xPosition, yPosition):
@@ -46,6 +50,35 @@ def message_display(text, fontSize, xPosition, yPosition):
 	gameDisplay.blit(TextSurf, TextRect)
 	pygame.display.update()
 
+def button(msg,x,y,w,h,bright,dark):
+	mouse = pygame.mouse.get_pos()
+
+	if x+w > mouse[0] > x and y+h > mouse[1] > y:
+		pygame.draw.rect(gameDisplay, dark, (x, y, w, h))
+	else:	
+		pygame.draw.rect(gameDisplay, bright, (x, y, w, h))
+
+	message_display(msg,20,x+(w/2),y+(h/2))
+	pygame.display.update()
+
+
+def game_intro():
+	intro=True
+	while intro:
+		for event in pygame.event.get():
+			print(event)
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				quit()
+		gameDisplay.fill(white)
+		message_display("FAST & FURIOUS!", 80, display_width/2, display_height/2)
+		pygame.display.update()
+		#Buttons to start & Quit game
+
+		button("PLAY", 120, 400, 200, 100, green, dark_green)
+		button("QUIT", 450, 400, 200, 100, red, dark_red)
+
+		clock.tick(15)
 
 def crash():
 	#carImg = pygame.image.load('crash.png')
@@ -59,7 +92,6 @@ def crash():
                     game_loop()
             if event.type == pygame.QUIT:
                 pygame.quit()
-
 	game_loop()
 
 
@@ -122,6 +154,7 @@ def game_loop():
 		pygame.display.update() #Updates a certain portion of the screen
 		clock.tick(60) #Frames per second
 
+game_intro()
 game_loop()
 pygame.quit() #Quits pygame
 quit()
