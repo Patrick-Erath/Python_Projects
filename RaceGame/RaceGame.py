@@ -6,6 +6,7 @@ pygame.init() #Initialize pigame
 display_width = 800
 display_height = 600
 car_width = 80
+pause = False
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -50,23 +51,29 @@ def message_display(text, fontSize, xPosition, yPosition):
 	gameDisplay.blit(TextSurf, TextRect)
 	pygame.display.update()
 
-def button(msg,x,y,w,h,bright,dark):
+def button(msg,x,y,w,h,bright,dark,action=None):
 	mouse = pygame.mouse.get_pos()
+	click = pygame.mouse.get_pressed()
+	#print(click)
 
 	if x+w > mouse[0] > x and y+h > mouse[1] > y:
 		pygame.draw.rect(gameDisplay, dark, (x, y, w, h))
+		if click[0] == 1 and action != None:
+			action()
 	else:	
 		pygame.draw.rect(gameDisplay, bright, (x, y, w, h))
 
 	message_display(msg,20,x+(w/2),y+(h/2))
 	pygame.display.update()
 
+def quitgame():
+	pygame.quit()
+	quit()
 
 def game_intro():
 	intro=True
 	while intro:
 		for event in pygame.event.get():
-			print(event)
 			if event.type == pygame.QUIT:
 				pygame.quit()
 				quit()
@@ -75,9 +82,28 @@ def game_intro():
 		pygame.display.update()
 		#Buttons to start & Quit game
 
-		button("PLAY", 120, 400, 200, 100, green, dark_green)
-		button("QUIT", 450, 400, 200, 100, red, dark_red)
+		button("PLAY", 120, 400, 200, 100, green, dark_green, game_loop)
+		button("QUIT", 450, 400, 200, 100, red, dark_red, quit) 
 
+
+def unpaused():
+	global pause
+	pause = False
+
+def paused():
+
+	#gameDisplay.fill(white)
+	message_display("Paused", 80, display_width/2, display_height/2)
+
+	while pause:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				quit()
+		#Buttons to Play & Quit game
+		button("PLAY", 120, 400, 200, 100, green, dark_green, unpaused)
+		button("QUIT", 450, 400, 200, 100, red, dark_red, quit) 
+		pygame.display.update()
 		clock.tick(15)
 
 def crash():
@@ -96,6 +122,8 @@ def crash():
 
 
 def game_loop():
+	global pause
+
 	xCar=display_width*0.45
 	yCar=display_height*0.7
 	x_change=0
@@ -119,6 +147,9 @@ def game_loop():
 					x_change += -10	#Set x change to -10 
 				if event.key == pygame.K_RIGHT: #If right arrow has been pressed
 					x_change += 10   #Set y change to +10
+				if event.key == pygame.K_SPACE:
+					pause = True
+					paused()
 
 			if event.type == pygame.KEYUP: #checks if a key has been released
 				if event.key == pygame.K_LEFT:
@@ -149,6 +180,9 @@ def game_loop():
 
 		if yCar < obs_startY + obs_height:
 			if xCar > obs_startX and xCar < obs_startX + obs_width or xCar + car_width > obs_startX and xCar + car_width < obs_startX + obs_width:
+				carImg = pygame.image.load('crash.png')
+				gameDisplay.blit(carImg, (xCar,yCar))
+				pygame.display.update()
 				crash()
 
 		pygame.display.update() #Updates a certain portion of the screen
