@@ -7,11 +7,11 @@ The game allows the user to control a small race car to avoid obstacles falling 
 As such, the user uses the left and right key buttons to move left or right and avoid obstacles.
 The game gets progressively harder as the obstacles fall at a faster pace and become wider
 ### Some Gameplay Screenshots :
-![RaceGame1](Images/RaceGame1.png)
+![RaceGame1](Images/RaceGame1v.png)
 
-![RaceGame2](Images/RaceGame2.png)
+![RaceGame2](Images/RaceGame2v.png)
 
-![RaceGame3](Images/RaceGame3.png)
+![RaceGame3](Images/RaceGame3v.png)
 
 ## Tic Tac Toe Game
 A simple Tic Tac Toe game that can be played in the console/terminal using Python3
