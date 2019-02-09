@@ -2,7 +2,7 @@ import pygame
 import time
 import random
 
-pygame.init() #Initialize pigame
+pygame.init() #Initialize pygame
 display_width = 800
 display_height = 600
 car_width = 80
