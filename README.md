@@ -17,9 +17,9 @@ The game gets progressively harder as the obstacles fall at a faster pace and be
 A 3D cube runner game which was built using pygame and openGL. The cubes approach the player from all sides 
 and there is no bounded limit as to where the user can move.
 
-![CubeRunner](CubeRunner/Screenshots/RaceGame3v.png)
+![CubeRunner](CubeRunner/Screenshots/CubeRunner.png)
 
 
 ## Tic Tac Toe Game
 A simple Tic Tac Toe game that can be played in the console/terminal using Python3
-![GamePlay](TicTacToe/Screenshots/GamePlay.png)
+![GamePlay](TicTacToe/Screenshots/TicTacToe.png)
