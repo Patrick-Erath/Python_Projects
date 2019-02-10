@@ -23,4 +23,4 @@ and there is no bounded limit as to where the user can move.
 ## Tic Tac Toe Game
 A simple Tic Tac Toe game that can be played in the console/terminal using Python3
 
-![GamePlay](TicTacToe/Screenshots/TicTacToe.png)
+![GamePlay](TicTacToe/ScreenShots/TicTacToe.png)
