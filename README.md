@@ -5,6 +5,8 @@ A repository of small python projects that were built in order to learn the basi
 A 3D cube runner game which was built using pygame and openGL. The cubes approach the player from all sides 
 and there is no bounded limit as to where the user can move.
 
+![CubeRunner](CubeRunner/Screenshots/CubeRunner.png)
+
 ## Race Game
 A 2D race game which was implemented using the pygame library. 
 The game allows the user to control a small race car to avoid obstacles falling horizontally.
@@ -16,9 +18,6 @@ The game gets progressively harder as the obstacles fall at a faster pace and be
 ![RaceGame2](RaceGame/Screenshots/RaceGame2v.png)
 
 ![RaceGame3](RaceGame/Screenshots/RaceGame3v.png)
-
-
-![CubeRunner](CubeRunner/Screenshots/CubeRunner.png)
 
 
 ## Tic Tac Toe Game
