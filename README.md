@@ -1,6 +1,10 @@
 # Python_Projects
 A repository of small python projects that were built in order to learn the basics of the language
 
+## Cuber Runner
+A 3D cube runner game which was built using pygame and openGL. The cubes approach the player from all sides 
+and there is no bounded limit as to where the user can move.
+
 ## Race Game
 A 2D race game which was implemented using the pygame library. 
 The game allows the user to control a small race car to avoid obstacles falling horizontally.
@@ -13,9 +17,6 @@ The game gets progressively harder as the obstacles fall at a faster pace and be
 
 ![RaceGame3](RaceGame/Screenshots/RaceGame3v.png)
 
-## Race Game
-A 3D cube runner game which was built using pygame and openGL. The cubes approach the player from all sides 
-and there is no bounded limit as to where the user can move.
 
 ![CubeRunner](CubeRunner/Screenshots/CubeRunner.png)
 
