@@ -62,21 +62,54 @@ ground_vertices = (
 	(10, -2.1, -300),
 	)
 
-# def ground():
-# 	glBegin(GL_QUADS)
-# 	for vertex in ground_vertices:
-# 		glColor3fv((0,0.5,0.5))
-# 		glVertex3fv(vertex)
-# 	glEnd()
+white = (0, 0, 0)
+black = (255,255,255)
+
+pygame.init()
+display = (800,600)
+gameDisplay = pygame.display.set_mode(display)
+#gameDisplay = pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+pygame.display.set_caption('Cubez')
+
+def text_objects(text, font):
+	textSurface = font.render(text, True, black)
+	return textSurface, textSurface.get_rect() 
+
+def message_display(text, fontSize, xPosition, yPosition):
+	largeText = pygame.font.Font('freesansbold.ttf', fontSize)
+	TextSurf, TextRect = text_objects(text, largeText)
+	TextRect.center = (xPosition, yPosition)
+	gameDisplay.blit(TextSurf, TextRect)
+	pygame.display.update()
+
+def game_intro():
+	intro=True
+	while intro:
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				pygame.quit()
+				quit()
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_SPACE:
+					main()
+		gameDisplay.fill(white)
+		message_display("Cubez Runnerz", 80, 400, 300)
+		message_display("By : Patrick Erath", 30, 400, 350)
+		message_display("PRESS SPACE TO START", 30, 400, 390)
+		pygame.display.update()
+		#Buttons to start & Quit game
+
 
 def set_vertices(max_distance, min_distance = -20, camera_x = 0, camera_y = 0):
 	camera_x = -1*int(camera_x)
 	camera_y = -1*int(camera_y)
 
-
-	x_value_change = random.randrange(camera_x-75, camera_x+75)
+	x_value_change = random.randrange(camera_x-75, camera_x+75) #+-75
 	y_value_change = random.randrange(camera_y-75, camera_y+75)
 	z_value_change = random.randrange(-1*max_distance,-20)
+	# x_value_change=0
+	# y_value_change=0
+	# z_value_change = max_distance
 
 	new_vertices = []
 
@@ -105,20 +138,18 @@ def Cube(vertices):
 	glEnd()
 
 def main():
-	pygame.init()
-	display = (800,600)
 	pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 	x_move = 0
 	y_move = 0
 	max_distance = 100
 	cur_x = 0
 	cur_y = 0
-	game_speed = 2
-	direction_speed = 0.8
+	game_speed = 1.5
+	direction_speed = 0.8 #0.8
 
 	cube_dict = {}
 
-	for i in range(60):
+	for i in range(120):
 		cube_dict[i] = set_vertices(max_distance)
 
 	#params: (FieldofView in degrees, AspectRation width/height, Clipping ranges
@@ -154,12 +185,10 @@ def main():
 				if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
 					y_move=0
 
-
-	
 		x = glGetDoublev(GL_MODELVIEW_MATRIX)
-		#print(x)
-		camera_z = x[3][0]
-		camera_z = x[3][1]
+		#print(x[3][0])
+		camera_x = x[3][0]
+		camera_y = x[3][1]
 		camera_z = x[3][2]
 
 		cur_x += x_move
@@ -176,16 +205,27 @@ def main():
 		new_max = 0
 
 		for each_cube in cube_dict:
+			#print("Cube y Coordinates",cube_dict[each_cube][0][1])
+			#print("Camera Coordiantes",camera_y)
+			#print(x)
+			#pygame.time.wait(50)
+			#print("test")
 			if camera_z <= cube_dict[each_cube][0][2]:
-				#delete_list.append(each_cube)
 				new_max = int(-1*(camera_z-max_distance*2))
-
 				cube_dict[each_cube] = set_vertices(new_max, int(camera_z-max_distance), cur_x, cur_y)
 
+			if camera_z < cube_dict[each_cube][0][2]+4:
+				#print("Passed z")
+				if camera_x < cube_dict[each_cube][0][0] and camera_x > cube_dict[each_cube][0][0] - 4:
+					#print("Passed x")
+					#if camera_y > cube_dict[each_cube][0][1]  and camera_y < cube_dict[each_cube][0][1]:
+					if camera_y > cube_dict[each_cube][0][1] and camera_y < cube_dict[each_cube][0][1] + 3 or camera_y < cube_dict[each_cube][0][1] and camera_y >  cube_dict[each_cube][0][1] - 1.4 :
+						print("Hit Object")
 
 		pygame.display.flip()	
 		#pygame.time.wait(40)
 
+game_intro()
 main()
 
 
