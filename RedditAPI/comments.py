@@ -4,9 +4,9 @@ import time
 #Create reddit instance
 reddit = praw.Reddit(client_id='wqrrsTJXlIrG7A',
 					client_secret='g72L_jWvbJEduw2Ho_gnX1P4a1g', 
-					password='lolmaster',
+					password='PASSWORD',
 					user_agent='Patrick', 
-					username='me_using_reddit')
+					username='username')
 
 subreddit = reddit.subreddit('python')
 hot_python = subreddit.hot(limit=3)
