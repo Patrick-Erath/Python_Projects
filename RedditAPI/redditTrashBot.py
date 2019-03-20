@@ -68,10 +68,25 @@ if __name__ == '__main__':
 			if time.time()-created_time <= 86400:
 				link = 'https://reddit.com'+submission.permalink
 				message= """"*Beep Boop Beep Boop, 
-Hello, my name is RedditAPI_Bot, and I detect reddit trash. My senses tell me that this post is spam. 
-At least {} percent out of the {} submissions from /u/{} appear to be for Udemy affiliate links.
-Don't let Reddit become spam ! Report this post!""".format(round(trashy_users[spam_user][0]*100,2), trashy_users[spam_user][1], spam_user)
+				Hello, my name is RedditAPI_Bot, and I detect reddit trash. My senses tell me that this post is spam. 
+				At least {} percent out of the {} submissions from /u/{} appear to be for Udemy affiliate links.
+				Don't let Reddit become spam ! Report this post!""".format(round(trashy_users[spam_user][0]*100,2), trashy_users[spam_user][1], spam_user)
 
+				try: 
+					with open("posted_urls.txt","r") as f:
+						already_posted = f.read().split('\n')
+					if link not in already_posted:
+						print(message)
+						submission.reply(message)
+						print("We've posted to {} and now we need to sleep for 12 minutes".format(link))
+						with open("posted_urls.txt", "a") as f:
+							f.write(link+'\n')
+						time.sleep(12*60)
+						break
+				except Exception as e:
+					print(str(e))
+					time.sleep(12*60)
+	
 
 
 
