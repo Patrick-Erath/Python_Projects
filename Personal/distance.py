@@ -7,7 +7,7 @@ from openpyxl.styles import Font
 
 # TODO: make this code run every hour 
 
-gmaps = googlemaps.Client(key='AIzaSyDGaHDtW-u88lGt-fp9TsGiBpOgJAxIavc')
+gmaps = googlemaps.Client(key='YOUR_GOOGLE_API_KEY_HERE')
 
 startingAddress = 'Schweinfurt, Germany'
 destinations = ['Amsterdam', 'Berlin', 'Brussels','Stuttgart','Sächsische Schweiz','Allgaü','Garmish-Partenkirchen']
