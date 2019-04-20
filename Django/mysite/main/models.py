@@ -4,7 +4,7 @@ from datetime import datetime
 # Create your models here.
 class TutorialCategory(models.Model):
 	tutorial_category = models.CharField(max_length=200)
-	tutorial_summary = models.CharField(max_length=200)
+	tutorial_summary = models.CharField(max_length=200) #category_summary
 	category_slug = models.CharField(max_length=200, default=1)
 
 	class Meta:
