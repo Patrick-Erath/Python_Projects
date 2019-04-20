@@ -1,7 +1,9 @@
 {% extends 'main/header.html'%}
 
 {% block content%}
-<h1>Category Page</h1>
+<div class="container">
+	<h3 align="center">{{cat.tutorial_category}}Restaurants: </h3>
+</div>
 <div class="row">
 	{% for tut, partone in part_ones.items %}
 		<div class="col s12 m6 l4">
@@ -17,7 +19,5 @@
 		</div>
 	{% endfor %}
 </div>
-
-
 
 {% endblock %}

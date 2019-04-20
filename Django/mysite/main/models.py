@@ -4,7 +4,7 @@ from datetime import datetime
 # Create your models here.
 class TutorialCategory(models.Model):
 	tutorial_category = models.CharField(max_length=200)
-	tutorial_summary = models.CharField(max_length=200) #category_summary
+	#tutorial_conte
 	category_slug = models.CharField(max_length=200, default=1)
 
 	class Meta:
@@ -34,6 +34,7 @@ class Tutorial(models.Model):
 	tutorial_published = models.DateTimeField('date published', default=datetime.now) # date&time represented in pythons datetime.datetime instance
 	tutorial_series = models.ForeignKey(TutorialSeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
 	tutorial_slug = models.CharField(max_length=200, default=1)
+	tutorial_website = models.CharField(max_length=100, default=1)
 	# Overwrite string method
 	def __str__(self): 
 		return self.tutorial_title

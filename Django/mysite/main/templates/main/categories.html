@@ -1,7 +1,9 @@
 {% extends 'main/header.html'%}
 
 {% block content%}
-<h1>Categories Page</h1>
+<div class="container">
+	<h3 align="center">Cuisine Categories:</h3>
+</div>
 <div class="row">
 	{% for cat in categories %}
 		<div class="col s12 m6 l4">
@@ -9,8 +11,7 @@
 				<div class="card hoverable">
 					<div class="card-content">
 						<div class="card-title">{{cat.tutorial_category}}</div>
-
-						<p>{{cat.tutorial_summary}}</p>
+<!-- 					#<p>{{cat.tutorial_summary}}</p> -->
 					</div>
 				</div>
 			</a>

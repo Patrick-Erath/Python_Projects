@@ -5,10 +5,10 @@ from django.db import models
 
 class TutorialAdmin(admin.ModelAdmin):
 	fieldsets = [
-		('Title and Date', {'fields': ['tutorial_title', 'tutorial_published']}),
+		('Title and Date', {'fields': ['tutorial_title', 'tutorial_published', 'tutorial_website']}),
 		('URL', {'fields': ['tutorial_slug']}),
 		('Series', {'fields': ['tutorial_series']}),
-		('Content', {'fields': ['tutorial_content']})
+		('Content', {'fields': ['tutorial_content']},)
 	]
 
 	formfield_overrides = {
