@@ -1,4 +1,4 @@
-print("sample tst")
+print("niet")
 
 import pygame
 import numpy as np
