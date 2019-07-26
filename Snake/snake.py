@@ -1,4 +1,4 @@
-#print('hello world!')
+print('hello world!')
 
 import pygame
 import numpy as np
