@@ -1,4 +1,4 @@
-print('hello world!')
+print("sample tst")
 
 import pygame
 import numpy as np
