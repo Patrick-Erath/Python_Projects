@@ -5,7 +5,8 @@ from random import randrange
 class Snake:
 	def __init__(self):
 		self.display_width = 400
-		self.size = 10;
+		self.size = 10
+		self.moving = False
 		# need vector of x,y 
 		self.array = np.array([
 			[randrange(5, self.display_width), randrange(5, self.display_width)],
@@ -24,19 +25,32 @@ class Snake:
 		pygame.display.set_caption('Snake')
 		clock = pygame.time.Clock()
 
-		FRUIT_PLACE = False
-		#while !FRUIT_PLACE:
-			# for x,y in array:
-				#if x+self.size==
-
-		while QUIT==False:
+		while True:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
-					QUIT = True
 					pygame.quit()
 					quit()
+
 				# reset
 				gameDisplay.fill(white)
+
+				# get move events
+				if event.type == pygame.KEYDOWN:
+					self.moving = True
+					if event.key == pygame.K_RIGHT:
+						move = 'right'
+					elif event.key == pygame.K_LEFT:
+						move = "left"
+					elif event.key == pygame.K_UP:
+						move = "up"
+					elif event.key == pygame.K_DOWN:
+						move = "down"
+
+				if event.type == pygame.KEYUP:
+					self.moving = False
+
+				if self.moving:
+					self.moveSnake(move)
 
 				#  draw snake
 				for x,y in self.array:
@@ -45,12 +59,10 @@ class Snake:
 				# draw fruit
 				pygame.draw.rect(gameDisplay, blue, [x_fruit, y_fruit, self.size, self.size])
 
-				# ensure fruit not in snake coordinates
+				# fruit not in snake coordinates -> fruit got eatten
 				for x,y in self.array:
 					is_inside = False;
 					if(abs(x - x_fruit) < self.size and abs(y - y_fruit) < self.size):
-						print(x)
-						print(x_fruit)
 						# fruit  is inside snake coordinate, make new fruit
 						while(True):
 							x_fruit = randrange(1, self.display_width)
@@ -59,23 +71,9 @@ class Snake:
 								break
 
 
-				# get move events
-				if event.type == pygame.KEYDOWN:
-					if event.key == pygame.K_RIGHT:
-						move = 'right'
-						self.moveSnake(move)
-					elif event.key == pygame.K_LEFT:
-						move = "left"
-						self.moveSnake(move)
-					elif event.key == pygame.K_UP:
-						move = "up"
-						self.moveSnake(move)
-					elif event.key == pygame.K_DOWN:
-						move = "down"
-						self.moveSnake(move)
-
 
 				pygame.display.update()
+				clock.tick(60)
 
 	def moveSnake(self, event):
 		# grab head
