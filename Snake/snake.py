@@ -6,7 +6,7 @@ class Snake:
 	def __init__(self):
 		self.display_width = 400
 		self.size = 10
-		self.moving = False
+		self.move = 'right'
 		self.score = 0
 		# need vector of x,y 
 		self.array = np.array([
@@ -37,21 +37,16 @@ class Snake:
 
 				# get move events
 				if event.type == pygame.KEYDOWN:
-					self.moving = True
 					if event.key == pygame.K_RIGHT:
-						move = 'right'
+						self.move = 'right'
 					elif event.key == pygame.K_LEFT:
-						move = "left"
+						self.move = "left"
 					elif event.key == pygame.K_UP:
-						move = "up"
+						self.move = "up"
 					elif event.key == pygame.K_DOWN:
-						move = "down"
+						self.move = "down"
 
-				if event.type == pygame.KEYUP:
-					self.moving = False
-
-				if self.moving:
-					self.moveSnake(move)
+					self.moveSnake(self.move)
 
 				#  draw snake
 				for x,y in self.array:
