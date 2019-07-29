@@ -7,6 +7,7 @@ class Snake:
 		self.display_width = 400
 		self.size = 10
 		self.moving = False
+		self.score = 0
 		# need vector of x,y 
 		self.array = np.array([
 			[randrange(5, self.display_width), randrange(5, self.display_width)],
@@ -64,6 +65,7 @@ class Snake:
 					is_inside = False;
 					if(abs(x - x_fruit) < self.size and abs(y - y_fruit) < self.size):
 						# fruit  is inside snake coordinate, make new fruit
+						self.score = self.score + 1
 						while(True):
 							x_fruit = randrange(1, self.display_width)
 							y_fruit = randrange(1, self.display_width)
