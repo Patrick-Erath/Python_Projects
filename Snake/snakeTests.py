@@ -9,7 +9,7 @@ class Snake:
 		self.size = 10
 		self.move = 'none'
 		self.score = 0
-		# need vector of x,y 
+		# need vector of x,y
 		self.array = np.array([
 			[randrange(5, self.display_width), randrange(5, self.display_width)],
 		])
@@ -17,20 +17,12 @@ class Snake:
 	def draw(self):
 		pygame.init()
 		blue = (51, 250, 204)
-		red = (255, 0, 0)
 		white = (255, 255, 255)
 		black = (0, 0, 0)
 		QUIT = False
 		x_fruit = randrange(1, self.display_width)
 		y_fruit = randrange(1, self.display_width)
-		counter = 0
-		blockers = [
-			[randrange(10, 30), randrange(10, 30)],
-			[-randrange(10, 30), randrange(10, 30)],
-			[randrange(10, 30), -randrange(10, 30)],
-			[-randrange(10, 30), -randrange(10, 30)]
-		]
-
+		key_pressed = False
 
 		gameDisplay = pygame.display.set_mode((self.display_width, self.display_width))
 		pygame.display.set_caption('Snake')
@@ -45,47 +37,29 @@ class Snake:
 				# reset
 				gameDisplay.fill(white)
 
+				#print(key_pressed)
 
 				# get move events
-				if event.type == pygame.KEYDOWN:
-					counter+=1
+				if event.type == pygame.KEYDOWN:  # checks if a key has been pressed
+					if event.key == pygame.K_LEFT:  # If left arrow has been pressed
+						x_change += -10  # Set x change to -10
+					if event.key == pygame.K_RIGHT:  # If right arrow has been pressed
+						x_change += 10  # Set y change to +10
+
+				if event.type == pygame.KEYUP:  # checks if a key has been released
+					if event.key == pygame.K_LEFT:
+						x_change = 0
 					if event.key == pygame.K_RIGHT:
-						self.move = 'right'
-					elif event.key == pygame.K_LEFT:
-						self.move = "left"
-					elif event.key == pygame.K_UP:
-						self.move = "up"
-					elif event.key == pygame.K_DOWN:
-						self.move = "down"
-					else:
-						self.move = "none"
+						x_change = 0
 
-					self.moveSnake(self.move)
-
-				# create blockers
-				# TODO : refactor this code
-				if counter == 0:
-					blockers = [
-						[randrange(10, 30), randrange(10, 30)],
-						[-randrange(10, 30), randrange(10, 30)],
-						[randrange(10, 30), -randrange(10, 30)],
-						[-randrange(10, 30), -randrange(10, 30)]
-					]
-				elif counter == 5:
-					counter = 0
 
 
 				#  draw snake
 				for x,y in self.array:
 					pygame.draw.rect(gameDisplay, black, [x, y, self.size, self.size])
-					# draw blockers
-					for blocker in blockers:
-						pygame.draw.rect(gameDisplay, red, [x - blocker[0], y-blocker[1], self.size, self.size])
-
 
 				# draw fruit
 				pygame.draw.rect(gameDisplay, blue, [x_fruit, y_fruit, self.size, self.size])
-
 
 				# fruit not in snake coordinates -> fruit got eatten
 				for x,y in self.array:
